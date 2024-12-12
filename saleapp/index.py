@@ -1,11 +1,11 @@
 import math
 from flask import render_template, request, redirect, session, jsonify
-import dao, utils
+from app import dao, utils
 from app import app, login
 from flask_login import login_user, logout_user
 from app.models import UserRole
 
-
+# Trang chủ
 @app.route("/")
 def index():
     kw = request.args.get('kw')
@@ -19,6 +19,7 @@ def index():
                            pages=math.ceil(total/app.config["PAGE_SIZE"]))
 
 
+# Load trang login
 @app.route("/login", methods=['get', 'post'])
 def login_process():
     if request.method.__eq__('POST'):
@@ -32,7 +33,7 @@ def login_process():
 
     return render_template('login.html')
 
-
+# load trang admin
 @app.route("/login-admin", methods=['post'])
 def login_admin_process():
     username = request.form.get('username')
@@ -44,13 +45,14 @@ def login_admin_process():
 
     return redirect('/admin')
 
-
+# Sử lý đăng xuất
 @app.route("/logout")
 def logout_process():
     logout_user()
     return redirect('/login')
 
 
+# load trang đăng ký
 @app.route('/register', methods=['get', 'post'])
 def register_process():
     err_msg = ''
@@ -71,7 +73,7 @@ def register_process():
 
     return render_template('register.html', err_msg=err_msg)
 
-
+# api lưu trữ dữ liệu - lấy dữ liệu
 @app.route("/api/carts", methods=['post'])
 def add_to_cart():
     # {
@@ -110,11 +112,39 @@ def add_to_cart():
     return jsonify(utils.cart_stats(cart))
 
 
-@app.route('/cart')
-def cart_view():
-    return render_template('cart.html')
+
+#Load Trang Tiếp Nhận Học Sinh
+@app.route('/Student_admission')
+def Student_admission():
+    return render_template('Student_admission.html')
+
+#Load Trang lập danh sách lớp
+@app.route('/Make_class_list')
+def Make_class_list():
+    return render_template('Make_class_list.html')
+
+#load trang nhập điểm
+@app.route('/Enter_score')
+def Enter_score():
+    return render_template('Enter_score.html')
+
+#Load trang xuất điểm
+@app.route('/Starting_point')
+def Starting_point():
+    return render_template('Starting_point.html')
+
+#Load trang thống kê báo cáo
+@app.route('/Reporting_statistics')
+def Reporting_statistics():
+    return render_template('Reporting_statistics.html')
+
+#Load trang thay đổi quy định
+@app.route('/Change_rules')
+def Change_rules():
+    return render_template('Change_rules.html')
 
 
+# Xử lý user từ cơ sở dữ liệu
 @login.user_loader
 def load_user(user_id):
     return dao.get_user_by_id(user_id)

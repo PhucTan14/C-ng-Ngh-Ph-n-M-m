@@ -1,31 +1,47 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
-{% if pages > 1 %}
-<ul class="pagination mt-2">
-    {% for i in range(1, pages + 1) %}
-    <li class="page-item"><a class="page-link" href="/?page={{ i }}">{{ i }}</a></li>
-    {% endfor %}
-</ul>
-{% endif %}
+<div class="min-h-screen bg-gray-100 flex flex-col items-center pt-[100px]">
+    <!-- Phần tiêu đề -->
+    <h1 class="text-xl font-bold text-gray-700 mb-6">
+        Chào mừng đến với Ứng dụng Quản lý Sinh viên - Cố vấn học tập!
+    </h1>
 
-{% if products %}
-<div class="row">
-    {% for p in products %}
-    <div class="col-md-3 col-12 p-2">
-        <div class="card">
-            <img class="card-img-top" src="{{ p.image }}" alt="Card image">
-            <div class="card-body">
-                <h4 class="card-title">{{ p.name }}</h4>
-                <p class="card-text">{{ p.price }} VNĐ</p>
-                <a href="#" class="btn btn-primary">Xem chi tiết</a>
-                <button class="btn btn-danger booking" onclick="addToCart({{p.id}}, '{{ p.name }}', {{ p.price }})">Đặt hàng</button>
-            </div>
+    <!-- Khung thông tin chính -->
+    <div class="grid grid-cols-2 gap-4 w-full max-w-4xl">
+        <!-- Thông tin cá nhân -->
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="font-bold text-gray-700 mb-4">Thông Tin Tài Khoản</h2>
+            <p class="text-gray-600"><strong>Họ tên:</strong>Nguyễn Gia Bảo</p>
+            <p class="text-gray-600"><strong>Vai trò:</strong> Giáo Viên</p>
+            <p class="text-gray-600"><strong>Lớp học:</strong> 11A4</p>
+        </div>
+
+        <!-- Đổi lớp và Đăng xuất -->
+        <div class="grid grid-cols-1 gap-4">
+            <button class="bg-white shadow-md rounded-lg p-4 flex items-center justify-center text-blue-500 font-bold">
+                <i class="fa-solid fa-exchange-alt mr-2"></i> Đổi lớp
+            </button>
+            <button class="bg-white shadow-md rounded-lg p-4 flex items-center justify-center text-red-500 font-bold">
+                <i class="fa-solid fa-sign-out-alt mr-2"></i> Đăng xuất
+            </button>
         </div>
     </div>
-    {% endfor %}
+
+    <!-- Các tiện ích của user đó -->
+    <div class="grid grid-cols-3 gap-4 mt-8 w-full max-w-4xl">
+        <button class="bg-white shadow-md rounded-lg p-6 flex flex-col items-center text-gray-700">
+            <i class="fa-solid fa-info-circle text-2xl mb-2"></i>
+            Thông tin liên lạc
+        </button>
+        <button class="bg-white shadow-md rounded-lg p-6 flex flex-col items-center text-gray-700">
+            <i class="fa-solid fa-bullhorn text-2xl mb-2"></i>
+            Diễn đàn
+        </button>
+        <button class="bg-white shadow-md rounded-lg p-6 flex flex-col items-center text-gray-700">
+            <i class="fa-solid fa-envelope text-2xl mb-2"></i>
+            Nhắn tin
+        </button>
+    </div>
 </div>
-{% else %}
-<div class="alert alert-info mt-1">KHÔNG có sản phẩm nào.</div>
-{% endif %}
 {% endblock %}

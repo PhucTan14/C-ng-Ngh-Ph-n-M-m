@@ -1,18 +1,41 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
-<h1 class="text-center text-danger mt-1">ĐĂNG NHẬP NGƯỜI DÙNG</h1>
+<div class="flex items-center justify-center h-[550px] bg-[#A4C2A3] m-[20px]">
+    <div class="bg-white shadow-lg rounded-lg flex w-[800px] overflow-hidden">
+        <!-- Phần hình ảnh bên phải -->
+        <div class="w-1/2 bg-[#EAE8D6] flex items-center justify-center">
+            <img src="https://e7.pngegg.com/pngimages/358/473/png-clipart-computer-icons-user-profile-person-child-heroes.png" alt="Hình user" class="w-4/4">
+        </div>
+        
+        <!-- Phần form đăng nhập bên trái -->
+        <div class="w-1/2 p-8">
+            <h1 class="text-xl font-bold text-center text-red-700 mb-6">
+                Đăng Nhập Hệ Thống Quản Lý Học Sinh
+            </h1>
+            <form method="post" action="/login">
+                <div class="form-floating mb-4 flex ">
+                    <input type="text" class="form-control w-[700px] border-gray-300 rounded-lg px-4 py-2" 
+                           id="username" placeholder="Tên đăng nhập" name="username" />       
+                </div>
 
-<form method="post" action="/login">
-    <div class="form-floating mb-3 mt-3">
-        <input type="text" class="form-control" id="username" placeholder="Tên đăng nhập" name="username" />
-        <label for="username">Tên đăng nhập</label>
-    </div>
+                <div class="form-floating mb-4">
+                    <input type="password" class="form-control border-gray-300 rounded-lg px-4 py-2" 
+                           id="pwd" placeholder="Mật khẩu" name="password" />
+                </div>
 
-    <div class="form-floating mt-3 mb-3">
-        <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="password" />
-        <label for="pwd">Mật khẩu</label>
+                <button type="submit" class="w-full bg-red-500 text-white py-2 rounded-lg font-medium">
+                    Đăng nhập
+                </button>
+
+                <p class="text-center text-sm text-gray-500 mt-4">
+                    Bạn Chưa Đăng Ký <a href="/register" class="text-red-500 font-bold">Đăng Ký</a>
+                </p>
+                <p class="text-center text-sm text-gray-500 mt-2">
+                    Hotline: <a href="tel:19003668" class="text-red-500 font-bold">011011100</a>
+                </p>
+            </form>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Đăng nhập</button>
-</form>
-{% endblock  %}
+</div>
+{% endblock %}
